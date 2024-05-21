@@ -1,11 +1,11 @@
-#ifndef COLOURFUL_PRINT_H
-#define COLOURFUL_PRINT_H
+#ifndef COLORFUL_PRINT_H
+#define COLORFUL_PRINT_H
 
 #include <string>
-#include <unordered_set>
+#include <regex>
 
-namespace colourful_print {
-  enum Colour {
+namespace colorful_print {
+  enum Color {
     BLACK   = 30,
     RED     = 31,
     GREEN   = 32,
@@ -20,13 +20,13 @@ namespace colourful_print {
   const std::string ANSI_ESCAPE_PREFIX = "\033[";
   const std::string ANSI_ESCAPE_SUFFIX = "m";
 
-  std::unordered_set<std::string> successPatterns = {"success", "ok"};
-  std::unordered_set<std::string> errorPatterns = {"error", "fail"};
+  std::string get_color_code(Color color);
+  std::string reset_color();
+ 
+  void colorize_pattern(std::string& text, const std::regex& pattern, Color color);
 
-  void set_colour(Colour colour);
-  void reset_colour();
-  void print(const std::string& text, Colour colour = Colour::DEFAULT);
+  void print(const std::string& text, Color color = Color::DEFAULT);
 } 
 
-#endif // COLOURFUL_PRINT_H
+#endif // COLORFUL_PRINT_H
 
